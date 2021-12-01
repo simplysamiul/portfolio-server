@@ -23,7 +23,6 @@ async function run() {
        app.get("/portfolio", async(req,res)=>{
             const cursor = portfolioInfo.find({});
             const result = await cursor.toArray();
-            console.log(result);
             res.send(result);
        });
     }
