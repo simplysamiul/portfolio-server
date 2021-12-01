@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors"); 
 const { MongoClient } = require('mongodb');
+const objectId = require("mongodb").ObjectId;
 const port = process.env.PORT || 5000;
 require('dotenv').config();
 
@@ -25,6 +26,18 @@ async function run() {
             const result = await cursor.toArray();
             res.send(result);
        });
+    // Get Specific Api 
+    app.get("/portfolio/:id", async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id : objectId(id)};
+        const result = await portfolioInfo.findOne(query);
+        res.send(result);
+    });
+    
+    
+
+
+
     }
     finally{
         // await client.close();
